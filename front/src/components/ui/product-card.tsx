@@ -9,11 +9,10 @@ const ProductCard:FC<Partial<IProduct>> = ({id, stock, name, description, price,
   const router = useRouter()
   const handleClick = () => {
   router.push(`${routes.productDetail}/${id}/${name}`) // Redirige a la página de detalles del producto
-  console.log(`Product ID: ${id} agregado al carrito`);
+  
 };
   return (
     
-
 <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
  onClick={handleClick}>
     <a href="#">
