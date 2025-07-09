@@ -1,0 +1,168 @@
+"use client";
+import React from "react";
+import { Formik } from "formik";
+import Input from "@/components/ui/input";
+import * as Yup from "yup";
+import Button from "@/components/ui/button";
+import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
+
+const RegisterSchema = Yup.object().shape({
+  firstName: Yup.string()
+    .min(2, "El nombre debe tener al menos 2 caracteres")
+    .max(50, "El nombre no puede tener más de 50 caracteres")
+    .required("El nombre es requerido"),
+  lastName: Yup.string()
+    .min(2, "El apellido debe tener al menos 2 caracteres")
+    .max(50, "El apellido no puede tener más de 50 caracteres")
+    .required("El apellido es requerido"),
+  email: Yup.string()
+    .email("El correo electrónico debe ser válido")
+    .required("El correo electrónico es requerido"),
+  password: Yup.string()
+    .min(6, "La contraseña debe tener al menos 6 caracteres")
+    .max(50, "La contraseña no puede tener más de 50 caracteres")
+    .required("La contraseña es requerida"),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password"), ""], "Las contraseñas deben coincidir")
+    .required("La confirmación de contraseña es requerida"),
+  address: Yup.string()
+    .min(5, "La dirección debe tener al menos 5 caracteres")
+    .max(100, "La dirección no puede tener más de 100 caracteres")
+    .required("La dirección es requerida"),
+  phone: Yup.string()
+    .matches(/^\d{10}$/, "El teléfono debe tener 10 dígitos")
+    .required("El teléfono es requerido"),
+});
+
+const RegisterForm = () => {
+    const [showPassword, setShowPassword] = React.useState(false);
+    
+      const handleShowPassword = () => {
+        setShowPassword((prev) => !prev);
+      };
+  return (
+    
+    <Formik
+      initialValues={{
+        email: "",
+        password: "",
+        name: "",
+        lastName: "",
+        confirmPassword: "",
+        address: "",
+        phone: "",
+      }}
+      
+      validationSchema={RegisterSchema}
+      onSubmit={(values, { setSubmitting }) => {
+        setTimeout(() => {
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
+        }, 400);
+      }}
+    >
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isSubmitting,
+        /* and other goodies */
+      }) => (
+        <form onSubmit={handleSubmit}>
+          <Input
+            label="Nombre"
+            id="name"
+            type="text"
+            name="name"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.name}
+            error={errors.name && touched.name ? errors.name : ""}
+          />
+          <Input
+            label="Apellido"
+            id="lastName"
+            type="text"
+            name="lastName"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.lastName}
+            error={errors.lastName && touched.lastName ? errors.lastName : ""}
+          />
+          <Input
+            label="Email"
+            id="email"
+            type="email"
+            name="email"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.email}
+            error={errors.email && touched.email ? errors.email : ""}
+          />
+
+          <Input
+            label="Contrasena"
+            id="password"
+            type="password"
+            name="password"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.password}
+            error={errors.password && touched.password ? errors.password : ""}
+>
+            <div onClick={handleShowPassword} className="text-gray-500">{showPassword ? <FaRegEyeSlash /> : <FaRegEye />}</div>
+          </Input>
+          <Input
+            label=" Confirmar Contrasena"
+            id="confirmPassword"
+            type="password"
+            name="confirmPassword"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.confirmPassword}
+            error={
+              errors.confirmPassword && touched.confirmPassword
+                ? errors.confirmPassword
+                : ""
+            }
+          >
+            <div onClick={handleShowPassword} className="text-gray-500">{showPassword ? <FaRegEyeSlash /> : <FaRegEye />}</div>
+          </Input>
+          <Input
+            label="Dirección"
+            id="address"
+            type="text"
+            name="address"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.address}
+            error={errors.address && touched.address ? errors.address : ""}
+          />
+          <Input
+            label="Telefono"
+            id="phone"
+            type="text"
+            name="phone"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.phone}
+            error={errors.phone && touched.phone ? errors.phone : ""}
+          />
+          <div className="flex justify-center">
+            <Button
+              label="Registrarse"
+              className="justify-center mt-8"
+              type="submit"
+              disabled={isSubmitting}
+            ></Button>
+          </div>
+        </form>
+      )}
+    </Formik>
+  );
+};
+
+export default RegisterForm;

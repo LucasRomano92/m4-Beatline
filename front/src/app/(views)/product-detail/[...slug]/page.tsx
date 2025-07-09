@@ -22,7 +22,7 @@ export default async function Page({
         return redirect (routes.notFound);
     }
     return (
-        <div className="mx-auto my-8 text-black p-6 border border-gray-200 rounded-lg bg-white shadow">
+        <div className="mx-auto my-8 text-black p-3 border border-gray-200 rounded-lg bg-white shadow">
             <h1 className="text-2xl font-bold mb-4">{product.name}</h1>
             <p className="mb-2">
                 <span className="font-semibold text-black">Descripción:</span> {product.description}
