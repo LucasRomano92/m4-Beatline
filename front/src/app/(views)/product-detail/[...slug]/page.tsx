@@ -4,26 +4,30 @@ import { products } from '@/helpers/products';
 import { routes } from '@/routes';
 import { redirect } from 'next/dist/client/components/navigation';
 import Button from '@/components/ui/button';
+import { getProductById } from '@/services/products';
 
 export default async function Page({
     params,
-    searchParams,
+   
 }: {
     params: { slug: string[] };
     searchParams: { [key: string]: string | string[] | undefined };
 }) {
     const { slug } = params;
-    const [id] = slug;
+    const [id] = slug [0];
 
     console.log('slug', slug);
 
-    const product = products.find((p) => p.id === Number(id));
+    // const product = products.find((p) => p.id === Number(id));
+    const product = await getProductById(Number(id));
+
+
     if (!product) {
         return redirect (routes.notFound);
     }
     return (
-        <div className="mx-auto my-8 text-black p-3 border border-gray-200 rounded-lg bg-white shadow">
-            <h1 className="text-2xl font-bold mb-4">{product.name}</h1>
+        <div className="p-3 mx-auto my-8 text-black bg-white border border-gray-200 rounded-lg shadow">
+            <h1 className="mb-4 text-2xl font-bold">{product.name}</h1>
             <p className="mb-2">
                 <span className="font-semibold text-black">Descripción:</span> {product.description}
             </p>
@@ -34,7 +38,7 @@ export default async function Page({
                 <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full max-h-80 object-contain mb-6"
+                    className="object-contain w-full mb-6 max-h-80"
                 />
             )}
             <div>

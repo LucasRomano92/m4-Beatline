@@ -16,7 +16,7 @@ export interface IProduct  {
   type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
 
 
-  interface IUser {
+  export interface IUser {
     id: number;
     name: string;
     email: string;
