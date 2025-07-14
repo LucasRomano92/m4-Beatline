@@ -10,14 +10,16 @@ interface ProductsListProps {
 const ProductsList: FC<ProductsListProps> = ({ products }) => {
   return (
     <>
-    <div className='grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-
-    {products?.map((product) =>(
-       
-        <ProductCard {...product} key={product.id} />
-      
-    ))}
-    {!products?.length && <span>No hay productos para mostrar</span>}
+    <div className='grid grid-cols-1 gap-4 p-4 bg-primary-500 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+      {products?.map((product) => (
+        <div
+          key={product.id}
+          className="transition-transform duration-200 hover:scale-105"
+        >
+          <ProductCard {...product} />
+        </div>
+      ))}
+      {!products?.length && <span>No hay productos para mostrar</span>}
     </div>
     </>
   )

@@ -1,13 +1,13 @@
 import { ICategory } from '..types';
 
 export const categories: ICategory[] = [
-    { id: 1, name: 'Smartphones', products: [] },
-    { id: 2, name: 'Laptops', products: [] },
-    { id: 3, name: 'Tablets', products: [] },
-    { id: 4, name: 'Headphones', products: [] },
-    { id: 5, name: 'Cameras', products: [] },
-    { id: 6, name: 'Printers', products: [] },
-    { id: 7, name: 'Monitors', products: [] },
-    { id: 8, name: 'Storage', products: [] },
-    { id: 9, name: 'Accessories', products: [] }
+  { id: 1, name: 'Guitarras', products: [] },
+  { id: 2, name: 'Baterías', products: [] },
+  { id: 3, name: 'Teclados', products: [] },
+  { id: 4, name: 'Micrófonos', products: [] },
+  { id: 5, name: 'Bajos', products: [] },
+  { id: 6, name: 'Percusión', products: [] },
+  { id: 7, name: 'Vientos', products: [] },
+  { id: 8, name: 'Cuerdas', products: [] },
+  { id: 9, name: 'Accesorios Musicales', products: [] }
 ];

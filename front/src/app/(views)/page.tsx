@@ -14,9 +14,10 @@ export default async function Home() {
             className="absolute inset-0 z-0 object-cover w-full h-full opacity-80"
             style={{ objectFit: "cover" }}
         />
+       
         <div className="relative z-10 flex flex-col items-center justify-center w-full text-center">
             <h1 className="text-4xl font-bold text-white md:text-6xl drop-shadow-lg">
-                Bienvenido a la página principal
+                Bienvenidos a Beatline
             </h1>
             <p className="mt-4 text-lg text-white md:text-2xl drop-shadow">
                 Descubre nuestros productos y ofertas

@@ -10,13 +10,13 @@ const NavItem: FC<NavItemProps> = (
 ) => {
   return (
     <li>
-          <Link href={href}
-           className="block py-2 px-3
-            text-white bg-primary-700 rounded-sm md:bg-transparent
-            md:text-primary-700 md:p-0 dark:text-white
-            md:dark:text-primary-300" aria-current="page">{label}
-
-          </Link>
+            <Link
+            href={href}
+            className="block px-3 py-2 text-white transition-all duration-200 rounded-md hover:bg-white hover:text-blue-600 hover:scale-105"
+            aria-current="page"
+            >
+            {label}
+            </Link>
         </li>
   )
 }
