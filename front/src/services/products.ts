@@ -47,4 +47,22 @@ export const getProductById = async (id: number): Promise<IProduct | null> => {
     }
 };
 
-     
+     export const getProdutsByCategory = async (
+        categoryId: string
+     ): Promise<IProduct[]> => {
+        try {
+            const response = await axiosApiBack.get('/products/category/' + categoryId);
+            console.log('API response:', response.data);
+
+            if (!response.data || !Array.isArray(response.data)) {
+                console.warn('Invalid products data', response.data);
+                return [];
+            }
+            return response.data;
+        } catch (error) {
+           if (error instanceof Error) {
+                console.warn('Error fetching products by category:', error?.message);
+            }
+            return [];
+        };
+     };

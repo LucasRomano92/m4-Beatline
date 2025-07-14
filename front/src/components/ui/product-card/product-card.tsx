@@ -1,9 +1,9 @@
 'use client' // esto convierte el archivo  en un componenente de react puro// 
 import { IProduct } from '@/types'
 import React, { FC } from 'react'
-import Button from './button'
 import { useRouter } from 'next/navigation'
 import { routes } from '@/routes'
+import AddCartButton from './add-cart-button'
 
 const ProductCard:FC<Partial<IProduct>> = ({id, stock, name, description, price, image }) => {
   const router = useRouter()
@@ -24,10 +24,10 @@ const ProductCard:FC<Partial<IProduct>> = ({id, stock, name, description, price,
         <a href="#">
            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{name || "Product Name"}</h5>
         </a>
-       <p className='n2 text-sm text-gray-500 dark:text-gray-400'>{description || "Product Description"}</p>
+       <p className='text-sm text-gray-500 n2 dark:text-gray-400'>{description || "Product Description"}</p>
         <div className="flex items-center justify-between">
             <span className="text-3xl font-bold text-gray-900 dark:text-white">${price ||"00.00"}</span>
-            <Button label="Add to cart" />
+            <AddCartButton/>
         </div>
     </div>
 </div>

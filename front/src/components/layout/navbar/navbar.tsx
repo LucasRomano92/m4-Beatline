@@ -4,6 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { LuKeyboardMusic } from 'react-icons/lu';
 import { NavLinks } from '@/constants/navLinks';
 import { routes } from '@/routes';
+import { AuthNavbar } from './auth-navbar';
 
 const Navbar = () => {
   return (
@@ -28,6 +29,7 @@ const Navbar = () => {
       ))}
       </ul>
     </div>
+    <AuthNavbar />
   </div>
 </nav>
 

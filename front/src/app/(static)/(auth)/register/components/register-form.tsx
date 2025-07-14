@@ -5,9 +5,11 @@ import Input from "@/components/ui/input";
 import * as Yup from "yup";
 import Button from "@/components/ui/button";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
+import { postRegister } from "@/services/auth";
+import { RegisterUserDto } from "@/types";
 
 const RegisterSchema = Yup.object().shape({
-  firstName: Yup.string()
+  name: Yup.string()
     .min(2, "El nombre debe tener al menos 2 caracteres")
     .max(50, "El nombre no puede tener más de 50 caracteres")
     .required("El nombre es requerido"),
@@ -33,15 +35,23 @@ const RegisterSchema = Yup.object().shape({
     .matches(/^\d{10}$/, "El teléfono debe tener 10 dígitos")
     .required("El teléfono es requerido"),
 });
+interface RegisterUserForm extends RegisterUserDto {
+  confirmPassword: string;
+}
 
 const RegisterForm = () => {
-    const [showPassword, setShowPassword] = React.useState(false);
-    
-      const handleShowPassword = () => {
-        setShowPassword((prev) => !prev);
-      };
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleShowPassword = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  const handleOnSubmit = (values: RegisterUserForm, { setSubmitting }: any) => {
+    const { confirmPassword, ...data } = values;
+    // You can handle submit logic here if needed
+  };
+
   return (
-    
     <Formik
       initialValues={{
         email: "",
@@ -52,13 +62,21 @@ const RegisterForm = () => {
         address: "",
         phone: "",
       }}
-      
       validationSchema={RegisterSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
+      onSubmit={async (values, { setSubmitting }) => {
+        const { confirmPassword, lastName, ...data } = values;
+        try {
+          const res = await postRegister(data);
+          if (res?.errors) {
+            return alert("ocurrio un error al registrar el usuario");
+          }
+          alert("Usuario registrado correctamente");
+          // Aquí puedes redirigir al usuario o realizar otra acción
+        } catch (error) {
+          alert("Ocurrió un error al registrar el usuario");
+        } finally {
           setSubmitting(false);
-        }, 400);
+        }
       }}
     >
       {({
@@ -106,19 +124,19 @@ const RegisterForm = () => {
           <Input
             label="Contrasena"
             id="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="password"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.password}
             error={errors.password && touched.password ? errors.password : ""}
->
+          >
             <div onClick={handleShowPassword} className="text-gray-500">{showPassword ? <FaRegEyeSlash /> : <FaRegEye />}</div>
           </Input>
           <Input
             label=" Confirmar Contrasena"
             id="confirmPassword"
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="confirmPassword"
             onChange={handleChange}
             onBlur={handleBlur}

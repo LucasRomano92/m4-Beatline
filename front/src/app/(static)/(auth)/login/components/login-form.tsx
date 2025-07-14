@@ -1,10 +1,17 @@
-'use client'   
+'use client'  
+
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
-import React, { children } from 'react'
+import React from 'react'
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import * as Yup from 'yup';
+import { postLogin } from '@/services/auth';
+import { toast } from 'react-toastify';
+import { useAuthContext } from '@/context/authContext';
+import { routes } from '@/routes';
+import { useRouter } from 'next/navigation';
+
 
 const loginSchema = Yup.object({
   email: Yup.string().email('El correo electronico debe ser valido').required('El correo electronico es requerido'),
@@ -12,18 +19,23 @@ const loginSchema = Yup.object({
 });
 
 const LoginForm = () => {
+  const { saveUserData } = useAuthContext();
+  const router = useRouter();
+
+
   const [formData, setFormData] = React.useState ({
-    email: "lucas@gmail.com",
+    email: "prueba2@prueba",
     password: "prueba123"
   });
 
   const [errors, setErrors] = React.useState<Record<string, string>>({});
+  const [loading, setLoading] = React.useState(false);
 
-// VALIDACIONES
-const handleValidation = async () => {
-  try {
-    await loginSchema.validate(formData, { abortEarly: false });
-    return true; // Validación exitosa
+  // VALIDACIONES
+  const handleValidation = async () => {
+    try {
+      await loginSchema.validate(formData, { abortEarly: false });
+      return true; // Validación exitosa
   } catch (error) {
     if (error instanceof Yup.ValidationError) {
      
@@ -52,40 +64,67 @@ const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   }));
 };
 
-const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  handleValidation();
+
+
+const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
-  console.log ("formulario enviado: ",formData)
-};
-  return (
-    <form className='flex flex-col' onSubmit={onSubmit}>
-        <Input 
-        label="Correo electronico"
-              id="email"
-              type="text"
-              placeholder='Ingresa tu correo electronico'
-              className='mb-4' 
-              value={formData.email}
-              onChange={handleOnChange}
-              error={errors?.email}
-              />  
+  const isValid = await handleValidation();
+  if (!isValid) return;
 
-              <Input
-              label='Contrasena'
-              id='password'
-              type={showPassword ? 'text' : 'password'}
-              placeholder='Ingresa tu Contrasena'
-              className='mb-4'
-              value= {formData.password}
-              onChange={handleOnChange}
-               error={errors?.password}
-              children={<div onClick={handleShowPassword} className="text-gray-500">{showPassword ? <FaRegEyeSlash /> : <FaRegEye />}</div>} />
-
-              
-        <Button label='Iniciar Sesion'>Iniciar Sesion</Button>
+  try {
+    setLoading(true);
+    const res = await postLogin(formData);
     
-    </form>
-  );
+
+    if (res?.errors) {
+      console.log("error", res);
+      return toast.error ("Ocurrió un error al iniciar sesión");
+    } 
+    toast.success ('inicio correcto')
+
+    saveUserData(res.data);
+
+    setTimeout (() => {
+      router.push(routes.home); // Redirigir al usuario a la página principal o donde desees
+    }, 2000);
+
+  } catch (error: unknown) {
+    toast.error('Ocurrió un error al iniciar sesión');
+  } finally {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }
+};
+
+return (
+  <form className='flex flex-col' onSubmit={onSubmit}>
+    <Input
+      label="Correo electronico"
+      id="email"
+      type="text"
+      placeholder='Ingresa tu correo electronico'
+      className='mb-4'
+      value={formData.email}
+      onChange={handleOnChange}
+      error={errors?.email}
+    />
+
+    <Input
+      label='Contrasena'
+      id='password'
+      type={showPassword ? 'text' : 'password'}
+      placeholder='Ingresa tu Contrasena'
+      className='mb-4'
+      value={formData.password}
+      onChange={handleOnChange}
+      error={errors?.password}
+      children={<div onClick={handleShowPassword} className="text-gray-500">{showPassword ? <FaRegEyeSlash /> : <FaRegEye />}</div>}
+    />
+
+    <Button label='Iniciar Sesion' type='submit' className='w-full' disabled={loading}>Iniciar Sesion</Button>
+  </form>
+);
 }
 
 export default LoginForm;

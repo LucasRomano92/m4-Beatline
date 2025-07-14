@@ -1,16 +1,9 @@
 import React from 'react'
+import UserData from './components/user-data';
 
 
 const PageProfile = () => {
-  const user = {
-    id: 1,
-    name: 'Lucas',
-    email: 'lucas@example.com',
-    address: '123 Main St, Springfield',
-    phone: '123-456-7890',
-    role: 'user',
-    
-  };
+  
   const orders = [
      {
       id: 1,
@@ -67,25 +60,19 @@ const PageProfile = () => {
   
 
   return (
-    <div className="mx-auto my-12 p-8 border border-gray-700 rounded-2xl bg-black shadow-lg">
-      <h2 className="text-3xl font-extrabold mb-8 text-white tracking-tight">Perfil de Usuario</h2>
-      <div className="mb-10 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-3">
-      <p className="text-white"><span className="font-semibold text-gray-300">Nombre:</span> {user.name}</p>
-      <p className="text-white"><span className="font-semibold text-gray-300">Email:</span> {user.email}</p>
-      <p className="text-white"><span className="font-semibold text-gray-300">Dirección:</span> {user.address}</p>
-      <p className="text-white"><span className="font-semibold text-gray-300">Teléfono:</span> {user.phone}</p>
-      <p className="text-white"><span className="font-semibold text-gray-300">Rol:</span> {user.role}</p>
-      </div>
-      <h3 className="text-2xl font-bold mb-6 text-white border-b border-primary-700 pb-2">Órdenes</h3>
+    <div className="p-8 mx-auto my-12 bg-black border border-gray-700 shadow-lg rounded-2xl">
+      <h2 className="mb-8 text-3xl font-extrabold tracking-tight text-white">Perfil de Usuario</h2>
+      <UserData />
+      <h3 className="pb-2 mb-6 text-2xl font-bold text-white border-b border-primary-700">Órdenes</h3>
       <ul>
       {orders.map(order => (
         <li
         key={order.id}
-        className="mb-8 border border-primary-700 rounded-xl p-6 shadow-sm bg-neutral-900 list-none transition-shadow"
+        className="p-6 mb-8 list-none transition-shadow border shadow-sm border-primary-700 rounded-xl bg-neutral-900"
         >
-        <div className="mb-4 flex items-center justify-between">
+        <div className="flex items-center justify-between mb-4">
           <div>
-          <span className="font-semibold text-lg text-white">Orden #{order.id}</span>
+          <span className="text-lg font-semibold text-white">Orden #{order.id}</span>
           <span
             className={`ml-4 px-3 py-1 rounded-lg font-medium text-sm ${
             order.status === 'approved'
@@ -96,27 +83,27 @@ const PageProfile = () => {
             {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
           </span>
           </div>
-          <span className="text-gray-400 text-sm">
+          <span className="text-sm text-gray-400">
           {new Date(order.date).toLocaleString()}
           </span>
         </div>
         <div>
-          <strong className="text-gray-200 text-base">Productos:</strong>
-          <ul className="mt-3 p-0">
+          <strong className="text-base text-gray-200">Productos:</strong>
+          <ul className="p-0 mt-3">
           {order.products.map(product => (
             <li
             key={product.id}
-            className="flex items-center bg-neutral-800 rounded-lg p-3 mb-3 shadow-sm list-none"
+            className="flex items-center p-3 mb-3 list-none rounded-lg shadow-sm bg-neutral-800"
             >
             <img
               src={product.image}
               alt={product.name}
-              className="w-16 h-16 object-cover rounded-lg mr-5 border border-gray-700 bg-black"
+              className="object-cover w-16 h-16 mr-5 bg-black border border-gray-700 rounded-lg"
             />
             <div>
-              <div className="font-semibold text-base text-white">{product.name}</div>
-              <div className="text-gray-400 text-sm my-1">{product.description}</div>
-              <div className="text-gray-300 text-sm">
+              <div className="text-base font-semibold text-white">{product.name}</div>
+              <div className="my-1 text-sm text-gray-400">{product.description}</div>
+              <div className="text-sm text-gray-300">
               <span className="mr-4">
                 <strong>Precio:</strong> ${product.price}
               </span>

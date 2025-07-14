@@ -13,7 +13,7 @@ export interface IProduct  {
   }
 
   type Params<T> = Promise<T>
-  type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
+  type SearchParams<T> = Promise<T>
 
 
   export interface IUser {
@@ -25,3 +25,21 @@ export interface IProduct  {
     role: eRole;
     orders: IOrder[];
   }
+ export interface RegisterUserDto {
+    name: string;
+    email: string;
+    password: string;
+    address: string;
+    phone: string;
+  }
+ export interface LoginUserDto {
+    email: string;
+    password: string;
+  }
+  export interface ICategory {
+  
+    id: number;
+    name: string;
+    products: IProduct[];
+    
+}

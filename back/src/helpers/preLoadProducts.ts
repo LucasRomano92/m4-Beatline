@@ -39,7 +39,7 @@ const productsToPreLoad: IProduct[] = [
       "Unleash your creativity and productivity with the iPad Pro: powerful performance, stunning Liquid Retina display, and all-day battery life make the iPad Pro the perfect tool for work and play. Transform your ideas into reality with the iPad Pro.",
     image:
       "https://www.apple.com/v/ipad-pro/a/images/meta/og__d8m6x7smkntm.png",
-    categoryId: 3,
+    categoryId: 2,
     stock: 10,
   },
   {
@@ -49,7 +49,7 @@ const productsToPreLoad: IProduct[] = [
       "Stay connected and healthy with the Apple Watch Series 6: track your workouts, monitor your health, and stay in touch with the people and information you care about most. Experience the future of health and wellness with the Apple Watch Series 6.",
     image:
       "https://www.apple.com/v/apple-watch-series-6/a/images/meta/og__c1zv8c8n7q06.png",
-    categoryId: 4,
+    categoryId: 2,
     stock: 10,
   },
   {
@@ -59,7 +59,7 @@ const productsToPreLoad: IProduct[] = [
       "Immerse yourself in sound with the AirPods Pro: active noise cancellation, transparency mode, and customizable fit make the AirPods Pro the perfect companion for music, calls, and everything in between. Elevate your audio experience with the AirPods Pro.",
     image:
       "https://www.apple.com/v/airpods-pro/a/images/meta/og__c1zv8c8n7q06.png",
-    categoryId: 5,
+    categoryId: 3,
     stock: 10,
   },
   {
@@ -69,7 +69,7 @@ const productsToPreLoad: IProduct[] = [
       "Elevate your home audio experience with the HomePod mini: immersive sound, intelligent assistant, and smart home hub make the HomePod mini the perfect addition to your home. Enjoy a world of music, news, and more with the HomePod mini.",
     image:
       "https://www.apple.com/v/homepod-mini/a/images/meta/og__d5k62k8b4qka.png",
-    categoryId: 6,
+    categoryId: 3,
     stock: 10,
   },
 ];

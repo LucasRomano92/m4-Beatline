@@ -1,4 +1,5 @@
 
+
 export const routes = {
   home: "/",
   profile: "/profile",
@@ -6,6 +7,7 @@ export const routes = {
   productDetail: "/product-detail",
   cart: "/cart",
   login: "/login",
+  register: "/register",
   landing: "/landing",
   notFound: "/not-found"
 }

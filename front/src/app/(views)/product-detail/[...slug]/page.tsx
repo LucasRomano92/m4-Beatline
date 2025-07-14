@@ -1,10 +1,11 @@
 
 import React from 'react'
-import { products } from '@/helpers/products';
+
 import { routes } from '@/routes';
 import { redirect } from 'next/dist/client/components/navigation';
-import Button from '@/components/ui/button';
+
 import { getProductById } from '@/services/products';
+import AddCartButton from '@/components/ui/product-card/add-cart-button';
 
 export default async function Page({
     params,
@@ -42,7 +43,7 @@ export default async function Page({
                 />
             )}
             <div>
-                <Button label="Add to cart" variant="primary" />
+                <AddCartButton/>
             </div>
         </div>
     );
