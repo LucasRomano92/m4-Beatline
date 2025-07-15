@@ -8,13 +8,18 @@ import { IoCartOutline, IoLogOutOutline } from 'react-icons/io5';
 import { LuUserRound } from 'react-icons/lu';
 import { usePathname } from 'next/navigation';
 import Loader from '@/components/ui/loader/loader';
+import { useCartContext } from '@/context/cartContext';
 
 export const AuthNavbar = () => {
     const { isAuth, resetUserData } = useAuthContext();
     // Replace with actual authentication logic
     // Dummy user object for demonstration; replace with actual user data from context or props
     const pathname =  usePathname ();
-      const user = {
+    const { total } = useCartContext();
+
+    
+
+    const user = {
     id: 1,
     name: 'Lucas',
     email: 'lucas@example.com',
@@ -51,9 +56,15 @@ if (isAuth === null) {
 
 return (
     <div className='flex items-center space-x-4'>
-        <div><Link href={routes.cart}>
-            <IoCartOutline className='w-5 h-5 text-primary-500' />
-        </Link>
+        <div>
+            <Link href={routes.cart} className="relative">
+                <IoCartOutline className='w-5 h-5 text-primary-500' />
+                {total > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-primary-900 text-white text-xs rounded-full px-2 py-0.5">
+                        {total}
+                    </span>
+                )}
+            </Link>
         </div>
         <div className='flex items-center space-x-2 rtl:space-x-reverse'>
             <Link href={routes.profile}>

@@ -6,7 +6,8 @@ import { useRouter } from 'next/navigation';
 import { routes } from '@/routes';
 import AddCartButton from './add-cart-button';
 
-const ProductCard: FC<Partial<IProduct>> = ({ id, name, description, price, image }) => {
+const ProductCard: FC<Partial<IProduct>> = (product) => {
+  const {id, name, description, price, image, stock} = product
   const router = useRouter();
 
   const handleClick = () => {
@@ -37,7 +38,7 @@ const ProductCard: FC<Partial<IProduct>> = ({ id, name, description, price, imag
         </div>
 
         <div className="mt-4">
-          <AddCartButton />
+          <AddCartButton product={product} />
         </div>
       </div>
     </div>

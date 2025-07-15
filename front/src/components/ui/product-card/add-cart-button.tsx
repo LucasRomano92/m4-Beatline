@@ -1,12 +1,26 @@
-import React from 'react';
+'use client'
+import React, { FC } from 'react';
 import Button from '../button';
 import Link from 'next/link';
 import { routes } from '@/routes';
+import { useAuthContext } from '@/context/authContext';
+import { IProduct } from '@/types';
+import { useCartContext } from '@/context/cartContext';
+import Loader from '../loader/loader';
 
-const AddCartButton = () => {
-  const isAuthenticated = false;
+const AddCartButton: FC<{ product: Partial<IProduct> }> = ({ product }) => {
+  const { isAuth } = useAuthContext();
+  const { addToCart, isProductInCart } = useCartContext();
 
-  if (!isAuthenticated) {
+  const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    return addToCart(product);
+  };
+  if (isAuth==null){
+    return <Loader/>
+  }
+
+  if (isAuth == false) {
     return (
       <div className="w-full p-4 mt-auto border rounded-md bg-primary-100 border-primary-200">
         <p className="text-sm text-center text-primary-700">
@@ -22,8 +36,21 @@ const AddCartButton = () => {
       </div>
     );
   }
+if (isProductInCart && isProductInCart(product?.id || 0)) {
+  return (
+    <Button
+      className="w-full mt-auto"
+      label="Producto ya en el carrito"
+      disabled
+      variant="outline"
+    />
+  );
+  
+}
 
-  return <Button label="Agregar al carrito" className="w-full mt-auto" />;
+  return (
+    <Button className="w-full mt-auto" label='Agregar al carrito' onClick={handleAddToCart} />
+  );
 };
 
 export default AddCartButton;

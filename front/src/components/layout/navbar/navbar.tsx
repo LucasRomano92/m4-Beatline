@@ -1,11 +1,11 @@
 import React from 'react'
 import NavItem from './nav-item';
 import { GiHamburgerMenu } from "react-icons/gi";
-import { LuKeyboardMusic } from 'react-icons/lu';
+
 import { NavLinks } from '@/constants/navLinks';
 import { routes } from '@/routes';
 import { AuthNavbar } from './auth-navbar';
-
+import { FaMusic } from "react-icons/fa6"
 const Navbar = () => {
   return (
   <>
@@ -13,8 +13,8 @@ const Navbar = () => {
 <nav className="text-white shadow-lg bg-gradient-to-r from-primary-500 to-primary-300">
   <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-6 py-4 mx-auto">
     <a href={routes.home} className="flex items-center gap-3">
-      <LuKeyboardMusic size={36} className="text-white drop-shadow" />
-      <span className="text-3xl font-bold tracking-wide text-white">Beatline</span>
+      <FaMusic size={28} className="text-white drop-shadow" />
+      <span className="text-3xl font-bold tracking-wide text-white">BEATLINE</span>
     </a>
     <button
       data-collapse-toggle="navbar-default"
