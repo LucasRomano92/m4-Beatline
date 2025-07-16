@@ -15,9 +15,9 @@ import ProductsList from "./components/products-list";
 
 
 export default async function Home() {
-  console.log("Home function started");
+  
   const { products,  } = await getData();
-console.log('Productos recibidos:', products); 
+
   return (
     <div>
       <section className="flex items-center justify-center w-full mb-8 bg-gray-100 bg-primary-950 h-96">

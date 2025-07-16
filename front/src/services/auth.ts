@@ -9,10 +9,10 @@ const axiosApiBack = axios.create({
 
 export const postRegister = async (data: RegisterUserDto) => {
     try {
-            console.log("Enviando datos de registro:", data);
+            
 
         const response = await axiosApiBack.post('/users/register', data);
-            console.log("Respuesta del backend:", response.data);
+           
 
         if (!response.data) {
             console.warn("Invalid post register data format", response.data);
@@ -37,9 +37,9 @@ export const postRegister = async (data: RegisterUserDto) => {
 
 export const postLogin = async (data: LoginUserDto): Promise<LoginServiceResponse> => {
   try {
-    console.log("Enviando datos de inicio de sesión:", data);
+   
     const response = await axiosApiBack.post('/users/login', data);
-    console.log("Respuesta del backend:", response.data);
+    
 
     if (!response.data) {
       console.warn("Invalid post login data format", response.data);

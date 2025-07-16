@@ -15,6 +15,12 @@ export interface IProduct  {
   type Params<T> = Promise<T>
   type SearchParams<T> = Promise<T>
 
+ export interface IOrder {
+  id: number;
+  status: string;
+  date: string;
+  products: IProduct[];
+}
 
   export interface IUser {
     id: number;
@@ -31,6 +37,10 @@ export interface IProduct  {
     password: string;
     address: string;
     phone: string;
+  }
+  export interface CreateOrderDto {
+    userId: number;
+    products: number[];
   }
  export interface LoginUserDto {
     email: string;

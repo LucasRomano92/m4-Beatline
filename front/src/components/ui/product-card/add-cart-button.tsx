@@ -7,6 +7,7 @@ import { useAuthContext } from '@/context/authContext';
 import { IProduct } from '@/types';
 import { useCartContext } from '@/context/cartContext';
 import Loader from '../loader/loader';
+import { toast } from 'react-toastify';
 
 const AddCartButton: FC<{ product: Partial<IProduct> }> = ({ product }) => {
   const { isAuth } = useAuthContext();
@@ -14,8 +15,12 @@ const AddCartButton: FC<{ product: Partial<IProduct> }> = ({ product }) => {
 
   const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    return addToCart(product);
-  };
+     addToCart(product);
+
+     return toast.success('Producto agregado al carrito', {
+      autoClose: 1500
+  });
+}
   if (isAuth==null){
     return <Loader/>
   }

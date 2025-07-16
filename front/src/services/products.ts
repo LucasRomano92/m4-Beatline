@@ -9,10 +9,10 @@ const axiosApiBack = axios.create({
 
 
 export const getProducts = async () => {
-    console.log('getProducts called');
+    
     try {
         const response = await axiosApiBack.get('/products');
-        console.log('API response:', response.data);
+        
 
 
         if (!response.data || !Array.isArray(response.data)) {
@@ -52,7 +52,7 @@ export const getProductById = async (id: number): Promise<IProduct | null> => {
      ): Promise<IProduct[]> => {
         try {
             const response = await axiosApiBack.get('/products/category/' + categoryId);
-            console.log('API response:', response.data);
+            
 
             if (!response.data || !Array.isArray(response.data)) {
                 console.warn('Invalid products data', response.data);

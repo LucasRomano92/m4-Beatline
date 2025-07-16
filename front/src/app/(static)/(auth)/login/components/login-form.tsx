@@ -77,7 +77,7 @@ const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     
 
     if (res?.errors) {
-      console.log("error", res);
+      
       return toast.error ("Ocurrió un error al iniciar sesión");
     } 
     toast.success ('inicio correcto')

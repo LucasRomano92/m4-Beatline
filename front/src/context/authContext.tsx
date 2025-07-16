@@ -40,9 +40,10 @@ export const AuthProvider = ({ children } : { children: React.ReactNode }): JSX.
     // restaurar los datos del contexto desde el local storage
     useEffect(() => {
         const storage  =JSON.parse(localStorage.getItem(AUTH_KEY) || '{}'); // vamos a tener el objeto js guardado en nuestro localStorahge
-        console.log('storage', storage);
+       
         if (storage === undefined || !Object.keys(storage).length) {
             setIsAuth(false);
+            setToken("");
             return;
         }
         const storageType = storage as any;

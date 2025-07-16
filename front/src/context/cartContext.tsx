@@ -26,7 +26,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }, [cart]);
 
     const addToCart = (product: Partial<IProduct>) => {
-        console.log('Adding to cart:', product);
+        
         // agregamos el producto
         setCart((prevCart) =>[...(prevCart || []),  product,])
        // le sumamos uno al total

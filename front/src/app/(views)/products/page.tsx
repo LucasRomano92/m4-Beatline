@@ -7,16 +7,16 @@ import { routes } from '@/routes';
 import clsx from 'clsx'
 
 
-const ProductsPage = async ({
+async function ProductsPage({
   searchParams,
 }: {
-  searchParams?: SearchParams<{ category: string }>
-}) => {
-  const { category = undefined } = searchParams || {};
-  console.log('Category:', category);
+  searchParams?: Promise<SearchParams<{ category: string }>>
+}) {
+  const resolvedSearchParams = await searchParams;
+  const { category = undefined } = resolvedSearchParams || {};
+
   const products = await getProdutsByCategory(category || 'all');
 
- 
 
   return (
     <div style={{ display: 'flex', gap: '2rem' }}>
