@@ -89,6 +89,7 @@ const RegisterForm = () => {
         isSubmitting,
         /* and other goodies */
       }) => (
+        <div className="max-w-md p-6 mx-auto mt-8 bg-black rounded-lg shadow-lg">
         <form onSubmit={handleSubmit}>
           <Input
             label="Nombre"
@@ -131,7 +132,9 @@ const RegisterForm = () => {
             value={values.password}
             error={errors.password && touched.password ? errors.password : ""}
           >
-            <div onClick={handleShowPassword} className="text-gray-500">{showPassword ? <FaRegEyeSlash /> : <FaRegEye />}</div>
+            <div onClick={handleShowPassword} className="text-gray-500">
+              {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+            </div>
           </Input>
           <Input
             label=" Confirmar Contrasena"
@@ -147,7 +150,9 @@ const RegisterForm = () => {
                 : ""
             }
           >
-            <div onClick={handleShowPassword} className="text-gray-500">{showPassword ? <FaRegEyeSlash /> : <FaRegEye />}</div>
+            <div onClick={handleShowPassword} className="text-gray-500">
+              {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+            </div>
           </Input>
           <Input
             label="Dirección"
@@ -178,6 +183,7 @@ const RegisterForm = () => {
             ></Button>
           </div>
         </form>
+        </div>
       )}
     </Formik>
   );

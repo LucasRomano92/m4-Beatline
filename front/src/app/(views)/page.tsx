@@ -17,7 +17,7 @@ export default async function Home() {
        
         <div className="relative z-10 flex flex-col items-center justify-center w-full text-center">
             <h1 className="text-4xl font-bold text-white md:text-6xl drop-shadow-lg">
-                Bienvenidos a Beatline
+                Bienvenidos a BEATLINE
             </h1>
             <p className="mt-4 text-lg text-white md:text-2xl drop-shadow">
                 Descubre nuestros productos y ofertas

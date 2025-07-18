@@ -6,6 +6,8 @@ import { ToastContainer, Zoom } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthProvider } from "@/context/authContext";
 import { CartProvider } from "@/context/cartContext";
+import RoutesPrivacy from "@/hook/useRoutesPrivacy/routes-privacy";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -31,7 +33,9 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <AuthProvider>
           <CartProvider>
-            {children}
+            <RoutesPrivacy>
+              {children}
+            </RoutesPrivacy>
           </CartProvider>
         </AuthProvider>
         <ToastContainer

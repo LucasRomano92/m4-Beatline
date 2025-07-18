@@ -1,4 +1,4 @@
-import { ICategory } from '..types';
+import { ICategory } from '../types';
 
 export const categories: ICategory[] = [
   { id: 1, name: 'Guitarras', products: [] },
