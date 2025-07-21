@@ -33,12 +33,12 @@ export default async function Page(props: { params: { slug?: string[] } }) {
             </h1>
             <p className="mb-4 text-gray-700">{product.description}</p>
           </div>
-          <div className="flex items-center justify-between mt-4">
+            <div className="flex items-center justify-between mt-4 gap-4">
             <span className="text-xl font-bold text-primary-700">
               ${product.price}
             </span>
             <AddCartButton product={product} />
-          </div>
+            </div>
         </div>
       </div>
     </div>

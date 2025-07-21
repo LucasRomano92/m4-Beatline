@@ -2,15 +2,17 @@ import React from "react";
 import { products } from "@/helpers/products";
 import { FaMusic } from "react-icons/fa6";
 import Button from "@/components/ui/button";
+import { routes } from "@/routes";
 
 const PageLanding = () => {
   const cart = products.slice(0, 3);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4 py-12 bg-gradient-to-br from-blue-100 to-white">
-     
+     <a href={routes.home}>
       <h1 className="flex items-center gap-2 text-3xl font-bold tracking-wide text-primary-900"><FaMusic />
         BEATLINE 
       </h1>
+      </a>
       <p className="max-w-xl mb-8 text-lg text-center text-gray-600">
         Descubre nuestros productos exclusivos y aprovecha las mejores ofertas.
         ¡Haz tu compra hoy y lleva tu experiencia al siguiente nivel!

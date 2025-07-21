@@ -48,7 +48,7 @@ export const AuthNavbar = () => {
           ></Button>
         </Link>
         <Link href={routes.register}>
-          <Button label="Registrarse" variant="outline"></Button>
+          <Button label="Registrarse" variant="primary"></Button>
         </Link>
       </div>
     );

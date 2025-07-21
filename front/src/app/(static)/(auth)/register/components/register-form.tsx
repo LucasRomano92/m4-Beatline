@@ -6,7 +6,10 @@ import * as Yup from "yup";
 import Button from "@/components/ui/button";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 import { postRegister } from "@/services/auth";
-import { RegisterUserDto } from "@/types";
+// import { RegisterUserDto } from "@/types";
+import { toast } from "react-toastify";
+import { routes } from "@/routes";
+import  { useRouter } from "next/navigation";
 
 const RegisterSchema = Yup.object().shape({
   name: Yup.string()
@@ -35,21 +38,23 @@ const RegisterSchema = Yup.object().shape({
     .matches(/^\d{10}$/, "El teléfono debe tener 10 dígitos")
     .required("El teléfono es requerido"),
 });
-interface RegisterUserForm extends RegisterUserDto {
-  confirmPassword: string;
-}
+// interface RegisterUserForm extends RegisterUserDto {
+//   confirmPassword: string;
+// }
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = React.useState(false);
+    const router = useRouter();
+  
 
   const handleShowPassword = () => {
     setShowPassword((prev) => !prev);
   };
 
-  const handleOnSubmit = (values: RegisterUserForm, { setSubmitting }: any) => {
-    const { confirmPassword, ...data } = values;
-    // You can handle submit logic here if needed
-  };
+  // const handleOnSubmit = (values: RegisterUserForm, { setSubmitting }: any) => {
+  //   const { confirmPassword, ...data } = values;
+  //   // You can handle submit logic here if needed
+  // };
 
   return (
     <Formik
@@ -64,16 +69,19 @@ const RegisterForm = () => {
       }}
       validationSchema={RegisterSchema}
       onSubmit={async (values, { setSubmitting }) => {
-        const { confirmPassword, lastName, ...data } = values;
+        const { ...data } = values;
         try {
           const res = await postRegister(data);
           if (res?.errors) {
-            return alert("ocurrio un error al registrar el usuario");
+            return toast.error("Ocurrió un error al registrar el usuario");
           }
-          alert("Usuario registrado correctamente");
+          toast.success("Usuario registrado correctamente");
           // Aquí puedes redirigir al usuario o realizar otra acción
+           setTimeout(() => {
+                  router.push(routes.login); // Redirigir al usuario a la página de inicio de sesión
+                }, 2000);
         } catch (error) {
-          alert("Ocurrió un error al registrar el usuario");
+          toast.error("Ocurrió un error al registrar el usuario", error);
         } finally {
           setSubmitting(false);
         }
@@ -137,7 +145,7 @@ const RegisterForm = () => {
             </div>
           </Input>
           <Input
-            label=" Confirmar Contrasena"
+            label="Confirmar Contrasena"
             id="confirmPassword"
             type={showPassword ? "text" : "password"}
             name="confirmPassword"

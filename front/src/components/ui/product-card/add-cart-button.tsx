@@ -31,6 +31,7 @@ const AddCartButton: FC<{ product: Partial<IProduct> }> = ({ product }) => {
         <p className="text-sm text-center text-primary-700">
           Por favor&nbsp;
           <Link
+           onClick={(e) => e.stopPropagation()}
             href={routes.login}
             className="font-semibold underline text-primary-600 hover:text-primary-800"
           >
@@ -50,11 +51,28 @@ if (isProductInCart && isProductInCart(product?.id || 0)) {
       variant="outline"
     />
   );
-  
+}
+
+if (product?.stock === 0) {
+  return (
+    <Button
+      className="w-full mt-auto"
+      label="Sin stock"
+      disabled
+      variant="outline"
+    />
+  );
 }
 
   return (
-    <Button className="w-full mt-auto" label='Agregar al carrito' onClick={handleAddToCart} />
+    <div className="w-full mt-auto">
+      <Button
+        className="w-full mt-auto"
+        variant="primary"
+        label="Agregar al carrito"
+        onClick={handleAddToCart}
+      />
+    </div>
   );
 };
 

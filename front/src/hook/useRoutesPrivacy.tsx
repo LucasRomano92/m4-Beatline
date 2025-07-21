@@ -27,11 +27,11 @@ const useRoutesPrivacy = () => {
     if (!routePrivacy) {
       return;
     }
-    if (
-      (routePrivacy === "public" && isAuth) ||
+    if 
+      
       (routePrivacy === "private" && !isAuth)
-    ) {
-      router.push(routes.home);
+     {
+      router.push(routes.login);
     }
     setLoading(false);
   }, [pathname, isAuth, publicRoutes, privateRoutes, router]);

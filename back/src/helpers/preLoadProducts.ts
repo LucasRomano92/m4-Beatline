@@ -76,7 +76,7 @@ const productsToPreLoad: IProduct[] = [{
     name: "SaxoWave Pro Tenor",
     description: "Elegancia y potencia en cada nota con el SaxoWave Pro Tenor: acabado dorado, digitación precisa y estuche rígido. Ideal para estudiantes avanzados y músicos profesionales.",
     price: 1599,
-    stock: 3,
+    stock: 0,
     image: "https://rvb-img.reverb.com/image/upload/s--OvaowZWt--/a_0/t_card-square/v1743287226/u9txuypqne9weu9cfk2l.jpg",
     categoryId: 7
   }
