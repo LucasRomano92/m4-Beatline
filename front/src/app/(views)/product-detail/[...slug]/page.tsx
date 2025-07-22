@@ -1,19 +1,25 @@
 import React from "react";
 
 import { routes } from "@/routes";
-import { redirect } from "next/dist/client/components/navigation";
-
+import { redirect } from "next/navigation"; // ✅ Usar directamente desde "next/navigation"
 import { getProductById } from "@/services/products";
 import AddCartButton from "@/components/ui/product-card/add-cart-button";
 
-export default async function Page(props: { params: { slug?: string[] } }) {
-  const { slug = [] } = await Promise.resolve(props.params); // 👈 FIX
+interface PageProps {
+  params: {
+    slug?: string[];
+  };
+}
+
+export default async function Page({ params }: PageProps) {
+  const slug = params.slug ?? []; // ✅ sin Promise.resolve
   const [id] = slug;
 
   const product = await getProductById(Number(id));
   if (!product) {
     redirect(routes.products);
   }
+
   return (
     <div className="max-w-2xl mx-auto my-10 overflow-hidden border border-gray-200 shadow-lg bg-primary-200 rounded-xl">
       <div className="flex flex-col md:flex-row">
@@ -33,12 +39,12 @@ export default async function Page(props: { params: { slug?: string[] } }) {
             </h1>
             <p className="mb-4 text-gray-700">{product.description}</p>
           </div>
-            <div className="flex items-center justify-between mt-4 gap-4">
+          <div className="flex items-center justify-between gap-4 mt-4">
             <span className="text-xl font-bold text-primary-700">
               ${product.price}
             </span>
             <AddCartButton product={product} />
-            </div>
+          </div>
         </div>
       </div>
     </div>
